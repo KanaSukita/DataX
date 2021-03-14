@@ -44,6 +44,9 @@ public class TransformerRegistry {
         registTransformer(new MaskTransformer());
         registTransformer(new MD5Transformer());
         registTransformer(new PrefixPreserveTransformer());
+
+        // self-added udf transformer
+        registTransformer(new DurationTransformer());
     }
 
     public static void loadTransformerFromLocalStorage() {
