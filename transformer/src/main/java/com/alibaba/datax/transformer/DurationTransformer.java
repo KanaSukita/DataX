@@ -15,8 +15,8 @@ import java.util.Arrays;
  */
 public class DurationTransformer extends Transformer {
     private Object masker;
+    String key;
     int columnIndex;
-    double ratio;
 
     public DurationTransformer(){
         setTransformerName("dx_duration_transformer");
@@ -30,7 +30,7 @@ public class DurationTransformer extends Transformer {
                 throw new RuntimeException("dx_duration_transformer transformer缺少参数");
             }
             columnIndex = (Integer) paras[0];
-            ratio = (Double) paras[1];
+            key = String.valueOf(paras[1]);
         } catch (Exception e) {
             throw DataXException.asDataXException(TransformerErrorCode.TRANSFORMER_ILLEGAL_PARAMETER, "paras:" + Arrays.asList(paras).toString() + " => " + e.getMessage());
         }
@@ -42,7 +42,7 @@ public class DurationTransformer extends Transformer {
             }
             if(column.getType() == Column.Type.STRING) {
                 DurationTransformationImpl masker = new DurationTransformationImpl();
-                Double newValue = masker.execute(oriValue, ratio);
+                Double newValue = masker.execute(oriValue, Double.valueOf(key));
                 record.setColumn(columnIndex, new DoubleColumn(newValue));
             }
         } catch (Exception e) {
