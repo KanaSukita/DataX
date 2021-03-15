@@ -7,7 +7,7 @@ import java.util.regex.*;
 /**
  * 原Duration数据类型转换的String对象转换成数字
  */
-public class DurationTransformationImpl extends DataTransformtionMasking{
+public class DurationTransformationImpl extends DataTransformationMasking{
 
     static final String[] timeUnit = {"hour", "minute", "s", "ms", "us", "ns"};
     static final double[] timeRatio = {3600.0, 60.0, 1.0, 1e-3, 1e-6, 1e-9};
@@ -23,7 +23,22 @@ public class DurationTransformationImpl extends DataTransformtionMasking{
      * @throws Exception
      */
     public Double execute(String originData, double ratio) throws NoSuchAlgorithmException {
-        // TODO： udf中的实现
+        Double res = 0.0;
+        String stringNum = "";
+
+        for (int i = 0 ; i < timeUnit.length; i++) {
+            String pattern = "[0-9]+" + timeUnit[i];
+            Pattern timePattern = Pattern.compile(pattern);
+            Matcher timeMacher = timePattern.matcher(originData);
+
+            if (timeMacher.find() == true) {
+                stringNum = timeMacher.group();
+                stringNum = stringNum.substring(0, stringNum.length() - timeUnit[i].length());
+                res += Double.parseDouble(stringNum) * timeRatio[i];
+            }
+        }
+
+        return res * ratio;
     }
 
     public void mask() throws Exception {

@@ -7,7 +7,7 @@ import com.alibaba.datax.transformer.maskingMethods.AbstractMasking;
  * 数据转换
  * @author Wenjun Zhang
  */
-public abstract class DataTransformtionMasking extends AbstractMasking {
+public abstract class DataTransformationMasking extends AbstractMasking {
 
     protected void setup() throws Exception {
     }

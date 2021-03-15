@@ -6,7 +6,7 @@ import com.alibaba.datax.common.element.DoubleColumn;
 import com.alibaba.datax.common.element.Record;
 import com.alibaba.datax.common.element.StringColumn;
 import com.alibaba.datax.common.exception.DataXException;
-import com.alibaba.datax.transformer.maskingMethods.irreversibleInterference.DurationTransformationImpl;
+import com.alibaba.datax.transformer.maskingMethods.dataTransformation.DurationTransformationImpl;
 
 import java.util.Arrays;
 
