@@ -42,7 +42,6 @@ public class DurationTransformationImpl extends DataTransformationMasking{
                         break;
                     }
                 }
-                numString = numString.substring(0, numString.length() - timeUnit[i].length());
                 res += Double.parseDouble(numString) * timeRatio[i];
             }
         }
