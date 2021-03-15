@@ -24,17 +24,26 @@ public class DurationTransformationImpl extends DataTransformationMasking{
      */
     public Double execute(String originData, double ratio) throws NoSuchAlgorithmException {
         Double res = 0.0;
-        String stringNum = "";
+        String timeString = "";
 
         for (int i = 0 ; i < timeUnit.length; i++) {
-            String pattern = "[0-9]+" + timeUnit[i];
+            String pattern = String.format("[0-9]+%s($|[0-9])", timeUnit[i]);
             Pattern timePattern = Pattern.compile(pattern);
             Matcher timeMacher = timePattern.matcher(originData);
 
             if (timeMacher.find() == true) {
-                stringNum = timeMacher.group();
-                stringNum = stringNum.substring(0, stringNum.length() - timeUnit[i].length());
-                res += Double.parseDouble(stringNum) * timeRatio[i];
+                timeString = timeMacher.group();
+                String numString = "";
+                for(int j = 0; j < timeString.length(); j++) {
+                    if (timeString.charAt(j) >= 48 && timeString.charAt(j) <= 57) {
+                        numString += timeString.charAt(j);
+                    }
+                    else {
+                        break;
+                    }
+                }
+                numString = numString.substring(0, numString.length() - timeUnit[i].length());
+                res += Double.parseDouble(numString) * timeRatio[i];
             }
         }
 
