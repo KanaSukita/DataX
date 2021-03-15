@@ -9,8 +9,8 @@ import java.util.regex.*;
  */
 public class DurationTransformationImpl extends DataTransformationMasking{
 
-    static final String[] timeUnit = {"hour", "minute", "s", "ms", "us", "ns"};
-    static final double[] timeRatio = {3600.0, 60.0, 1.0, 1e-3, 1e-6, 1e-9};
+    static final String[] timeUnit = {"y", "mo", "d", "h", "m", "s", "ms", "us", "ns"};
+    static final double[] timeRatio = {3.1536e7, 2.592e6, 8.64e4, 3.6e3, 60.0, 1.0, 1e-3, 1e-6, 1e-9};
 
     public double execute(double d) throws Exception {
         return 0;
